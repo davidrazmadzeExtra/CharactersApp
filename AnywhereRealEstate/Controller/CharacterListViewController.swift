@@ -120,9 +120,7 @@ extension CharacterListViewController {
     if segue.identifier == showDetailSegue,
        let characterViewController = segue.destination as? CharacterViewController,
        let selectedIndex = tableView.indexPathForSelectedRow {
-      // Pass along character to the Detail Controller
-      // TODO: characterViewController.character = characters[selectedIndex.row]
-      //
+      characterViewController.character = characters[selectedIndex.row]
     }
   }
   

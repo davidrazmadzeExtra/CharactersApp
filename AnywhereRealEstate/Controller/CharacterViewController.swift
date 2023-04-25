@@ -9,6 +9,11 @@ import UIKit
 
 class CharacterViewController: UIViewController {
   
+  // MARK: - Properties
+  
+  /// Character passed along from the Table View
+  var character: Character?
+  
   // MARK: - IBOutlets
   
   @IBOutlet weak var characterImageView: UIImageView!
@@ -25,12 +30,15 @@ class CharacterViewController: UIViewController {
   // MARK: - Helper Functions
   
   func setupCharacterDetails() {
+    guard let character else { return }
+    
     let imageURL = URL(string: "https://pngimg.com/uploads/simpsons/simpsons_PNG6.png")
     let imageData = try? Data(contentsOf: imageURL!)
     characterImageView.image = UIImage(data: imageData!)
     
-    titleLabel.text = "Homer Simpson"
-    descriptionTextView.text = "Homer Jay Simpson is a fictional character and the main protagonist of the American animated sitcom The Simpsons. He is voiced by Dan Castellaneta and first appeared, along with the rest of his family, in The Tracey Ullman Show short \"Good Night\" on April 19, 1987."
+    titleLabel.text = character.name
+    descriptionTextView.text = character.description
+    print(character.description)
   }
   
 }

@@ -71,22 +71,29 @@ class APIManager {
         var uniqueCharacterNames = Set<String>()
         let jsonResponse = try JSONDecoder().decode(ApiResponse.self, from: data)
         let characters = jsonResponse.relatedTopics.compactMap { relatedTopic -> Character? in
-            // Get the full name by extracting it before the "-" dash character
-            let fullName = relatedTopic.text
-            let dashIndex = relatedTopic.text.firstIndex(of: "-") ?? fullName.endIndex
-            var characterName = fullName[..<dashIndex].trimmingCharacters(in: .whitespacesAndNewlines)
-            
-            // Remove any parentheses from the character name ()
-            characterName = characterName.replacingOccurrences(of: "\\([^\\)]+\\)", with: "", options: .regularExpression)
-            characterName = characterName.trimmingCharacters(in: .whitespacesAndNewlines)
-            
-            // Remove any character duplicates
-            if !uniqueCharacterNames.contains(characterName) {
-                uniqueCharacterNames.insert(characterName)
-                return Character(name: characterName, iconUrl: relatedTopic.icon.url, title: relatedTopic.firstURL, description: relatedTopic.result)
-            }
-            
-            return nil
+          // Get the full name by extracting it before the "-" dash character
+          let fullName = relatedTopic.text
+          let dashIndex = relatedTopic.text.firstIndex(of: "-") ?? fullName.endIndex
+          var characterName = fullName[..<dashIndex].trimmingCharacters(in: .whitespacesAndNewlines)
+          
+          // Remove any parentheses from the character name ()
+          characterName = characterName.replacingOccurrences(of: "\\([^\\)]+\\)", with: "", options: .regularExpression)
+          characterName = characterName.trimmingCharacters(in: .whitespacesAndNewlines)
+          
+          // Get the description which is all the text after the extracted character name
+          // Get the description which is all the text after the extracted character name
+          let characterNameRange = relatedTopic.text.range(of: characterName)
+          let descriptionStartIndex = characterNameRange?.upperBound ?? relatedTopic.text.startIndex
+          let updatedDescriptionStartIndex = relatedTopic.text.index(descriptionStartIndex, offsetBy: 2) // move past the "-" dash
+          let characterDescription = relatedTopic.text[updatedDescriptionStartIndex...].trimmingCharacters(in: .whitespacesAndNewlines)
+          
+          // Remove any character duplicates
+          if !uniqueCharacterNames.contains(characterName) {
+            uniqueCharacterNames.insert(characterName)
+            return Character(name: characterName, iconUrl: relatedTopic.icon.url, title: relatedTopic.firstURL, description: characterDescription)
+          }
+          
+          return nil
         }
         completion(.success(characters))
       } catch {
