@@ -65,7 +65,7 @@ class CharacterListViewController: UITableViewController {
           self?.characters = characters
         case .failure(let error):
           print("Error fetching characters: \(error)")
-          // Optionally, display an error message to the user
+          // TODO: display an error message to the user
         }
       }
     }

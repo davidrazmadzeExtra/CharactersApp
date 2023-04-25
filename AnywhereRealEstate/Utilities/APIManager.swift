@@ -68,9 +68,25 @@ class APIManager {
       }
       
       do {
+        var uniqueCharacterNames = Set<String>()
         let jsonResponse = try JSONDecoder().decode(ApiResponse.self, from: data)
-        let characters = jsonResponse.relatedTopics.map { relatedTopic -> Character in
-          return Character(name: relatedTopic.text, iconUrl: relatedTopic.icon.url, title: relatedTopic.firstURL, description: relatedTopic.result)
+        let characters = jsonResponse.relatedTopics.compactMap { relatedTopic -> Character? in
+            // Get the full name by extracting it before the "-" dash character
+            let fullName = relatedTopic.text
+            let dashIndex = relatedTopic.text.firstIndex(of: "-") ?? fullName.endIndex
+            var characterName = fullName[..<dashIndex].trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            // Remove any parentheses from the character name ()
+            characterName = characterName.replacingOccurrences(of: "\\([^\\)]+\\)", with: "", options: .regularExpression)
+            characterName = characterName.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            // Remove any character duplicates
+            if !uniqueCharacterNames.contains(characterName) {
+                uniqueCharacterNames.insert(characterName)
+                return Character(name: characterName, iconUrl: relatedTopic.icon.url, title: relatedTopic.firstURL, description: relatedTopic.result)
+            }
+            
+            return nil
         }
         completion(.success(characters))
       } catch {
