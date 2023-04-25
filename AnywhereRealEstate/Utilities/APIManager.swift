@@ -82,12 +82,18 @@ class APIManager {
           characterName = characterName.replacingOccurrences(of: "\\([^\\)]+\\)", with: "", options: .regularExpression)
           characterName = characterName.trimmingCharacters(in: .whitespacesAndNewlines)
           
-          // Get the description which is all the text after the extracted character name
+          
           // Get the description which is all the text after the extracted character name
           let characterNameRange = relatedTopic.text.range(of: characterName)
           let descriptionStartIndex = characterNameRange?.upperBound ?? relatedTopic.text.startIndex
-          let updatedDescriptionStartIndex = relatedTopic.text.index(descriptionStartIndex, offsetBy: 2) // move past the "-" dash
-          let characterDescription = relatedTopic.text[updatedDescriptionStartIndex...].trimmingCharacters(in: .whitespacesAndNewlines)
+          let offset = 2
+          var characterDescription = ""
+          
+          // move past the "-" dash to get the character's description
+          if relatedTopic.text.distance(from: descriptionStartIndex, to: relatedTopic.text.endIndex) > offset {
+              let updatedDescriptionStartIndex = relatedTopic.text.index(descriptionStartIndex, offsetBy: offset)
+              characterDescription = relatedTopic.text[updatedDescriptionStartIndex...].trimmingCharacters(in: .whitespacesAndNewlines)
+          }
           
           // Remove any character duplicates
           if !uniqueCharacterNames.contains(characterName) {
