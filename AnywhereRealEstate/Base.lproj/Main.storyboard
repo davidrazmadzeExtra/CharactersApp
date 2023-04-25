@@ -46,10 +46,50 @@
                     <view key="view" contentMode="scaleToFill" id="vdF-KY-ZWq">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P1q-Ql-xAj">
+                                <rect key="frame" x="64" y="32" width="265" height="192"/>
+                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="192" id="yzJ-qf-g0y"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Character Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kZh-LB-aP5" userLabel="Title Label">
+                                <rect key="frame" x="32" y="240" width="329" height="28.666666666666686"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ke5-Zc-JCD">
+                                <rect key="frame" x="32" y="270.66666666666669" width="329" height="539.33333333333326"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="A4n-eQ-vfW"/>
                         <color key="backgroundColor" systemColor="systemYellowColor"/>
+                        <constraints>
+                            <constraint firstItem="Ke5-Zc-JCD" firstAttribute="leading" secondItem="A4n-eQ-vfW" secondAttribute="leading" constant="32" id="2MD-ud-pBe"/>
+                            <constraint firstItem="kZh-LB-aP5" firstAttribute="leading" secondItem="A4n-eQ-vfW" secondAttribute="leading" constant="32" id="HlW-ap-a4B"/>
+                            <constraint firstItem="A4n-eQ-vfW" firstAttribute="trailing" secondItem="P1q-Ql-xAj" secondAttribute="trailing" constant="64" id="Ipj-J9-ViO"/>
+                            <constraint firstItem="A4n-eQ-vfW" firstAttribute="trailing" secondItem="kZh-LB-aP5" secondAttribute="trailing" constant="32" id="N1U-JK-jFi"/>
+                            <constraint firstItem="kZh-LB-aP5" firstAttribute="top" secondItem="P1q-Ql-xAj" secondAttribute="bottom" constant="16" id="Ope-wU-HcE"/>
+                            <constraint firstItem="A4n-eQ-vfW" firstAttribute="bottom" secondItem="Ke5-Zc-JCD" secondAttribute="bottom" constant="32" id="bFD-BT-nrf"/>
+                            <constraint firstItem="P1q-Ql-xAj" firstAttribute="leading" secondItem="A4n-eQ-vfW" secondAttribute="leading" constant="64" id="d1p-Op-sOr"/>
+                            <constraint firstItem="Ke5-Zc-JCD" firstAttribute="top" secondItem="kZh-LB-aP5" secondAttribute="bottom" constant="2" id="fRj-HX-up8"/>
+                            <constraint firstItem="P1q-Ql-xAj" firstAttribute="top" secondItem="A4n-eQ-vfW" secondAttribute="top" constant="32" id="jnz-B0-rxo"/>
+                            <constraint firstItem="A4n-eQ-vfW" firstAttribute="trailing" secondItem="Ke5-Zc-JCD" secondAttribute="trailing" constant="32" id="jtQ-uN-Rdz"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="MDr-Q9-hLs"/>
+                    <connections>
+                        <outlet property="characterImageView" destination="P1q-Ql-xAj" id="RzY-ld-bVa"/>
+                        <outlet property="descriptionTextView" destination="Ke5-Zc-JCD" id="NhC-Qb-xBT"/>
+                        <outlet property="titleLabel" destination="kZh-LB-aP5" id="s5G-eG-NYa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VFM-Qo-CXp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -57,8 +97,14 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
