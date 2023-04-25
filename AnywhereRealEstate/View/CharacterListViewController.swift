@@ -15,6 +15,7 @@ class CharacterListViewController: UITableViewController {
   
   private let characters = ["Bart", "Homer", "Lisa", "Phil", "Jack"]
   private let cellReuseIdentifier = "CharacterCell"
+  private let showDetailSegue = "ShowCharacterDetail"
   
   // MARK: - Lifecycle
   
@@ -43,7 +44,18 @@ extension CharacterListViewController {
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    performSegue(withIdentifier: showDetailSegue, sender: self)
     tableView.deselectRow(at: indexPath, animated: true)
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == showDetailSegue,
+       let characterViewController = segue.destination as? CharacterViewController,
+       let selectedIndex = tableView.indexPathForSelectedRow {
+      // Pass along character to the Detail Controller
+      // TODO: characterViewController.character = characters[selectedIndex.row]
+      //
+    }
   }
   
 }
