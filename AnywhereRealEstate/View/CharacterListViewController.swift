@@ -34,8 +34,6 @@ class CharacterListViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    title = "Simpsons Characters"
-
     setupActivityIndicator()
     setupSearchBar()
     fetchCharacters()
@@ -71,6 +69,7 @@ class CharacterListViewController: UITableViewController {
         case .success(let characters):
           self?.allCharacters = characters
           self?.characters = characters
+          self?.title = "Simpsons Characters - \(characters.count)"
         case .failure(let error):
           print("Error fetching characters: \(error)")
           // TODO: display an error message to the user
@@ -115,6 +114,8 @@ extension CharacterListViewController {
     tableView.deselectRow(at: indexPath, animated: true)
   }
   
+  // MARK: - Prepare for segue
+  
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == showDetailSegue,
        let characterViewController = segue.destination as? CharacterViewController,
@@ -142,6 +143,9 @@ extension CharacterListViewController: UISearchBarDelegate {
   
   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
     searchBar.resignFirstResponder()
+    searchBar.text = nil
+    characters = allCharacters
+    tableView.reloadData()
   }
 }
 
