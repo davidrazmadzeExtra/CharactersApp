@@ -24,9 +24,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="rTe-nE-gBl" kind="show" identifier="ShowCharacterDetail" id="oNW-ZG-Ahl"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -35,6 +32,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="gH6-ss-oOm"/>
+                    <connections>
+                        <segue destination="rTe-nE-gBl" kind="show" identifier="ShowCharacterDetail" id="K3o-Az-B40"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rtn-7i-l2P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
