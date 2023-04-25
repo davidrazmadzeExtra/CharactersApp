@@ -7,7 +7,9 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
+/// Contains a `UITableView` containing different characters coming from a RESTful API
+/// This is the initial view controller that gets loaded when the app is launched.
+class CharacterListViewController: UITableViewController {
   
   // MARK: - Properties
   
@@ -24,7 +26,7 @@ class ViewController: UITableViewController {
 
 // MARK: - UITableViewDelegate/UITableViewDataSource
 
-extension ViewController {
+extension CharacterListViewController {
   
   override func numberOfSections(in tableView: UITableView) -> Int {
     return 1
@@ -37,7 +39,6 @@ extension ViewController {
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
     cell.textLabel?.text = characters[indexPath.row]
-    cell.accessoryType = .disclosureIndicator
     return cell
   }
   
