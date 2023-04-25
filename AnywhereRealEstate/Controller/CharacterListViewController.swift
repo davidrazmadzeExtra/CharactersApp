@@ -37,6 +37,8 @@ class CharacterListViewController: UITableViewController {
     setupActivityIndicator()
     setupSearchBar()
     fetchCharacters()
+    
+    tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
   }
   
   // MARK: - Helper Functions
@@ -89,6 +91,8 @@ class CharacterListViewController: UITableViewController {
     searchBar.frame = CGRect(x: 0, y: 0, width: 200, height: 70)
     searchBar.showsCancelButton = true
     searchBar.searchBarStyle = .default
+    searchBar.backgroundImage = UIImage()
+    searchBar.backgroundColor = .clear
     searchBar.sizeToFit()
     
     searchBar.delegate = self
