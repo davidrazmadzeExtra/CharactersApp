@@ -135,6 +135,7 @@ extension CharacterListViewController: UISearchBarDelegate {
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     if searchText.isEmpty {
       characters = allCharacters
+      tableView.reloadData()
     } else {
       // Filter the characters by name
       characters = allCharacters.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
@@ -147,5 +148,6 @@ extension CharacterListViewController: UISearchBarDelegate {
     characters = allCharacters
     tableView.reloadData()
   }
+  
 }
 
