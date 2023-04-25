@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>API_URL</key>
-	<string>http://api.duckduckgo.com/?q=simpsons+characters&amp;format=json</string>
+	<string>http://api.duckduckgo.com/?q=the+wire+characters&amp;format=json</string>
 	<key>APP_TITLE</key>
-	<string>The Simpsons</string>
+	<string>The Wire</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CharacterListViewController.swift
 //  AnywhereRealEstate
 //
 //  Created by David Razmadze on 4/25/23.
@@ -61,15 +61,22 @@ class CharacterListViewController: UITableViewController {
     activityIndicator.startAnimating()
     
     // Fetch the character data
+    guard let apiURL = Bundle.main.infoDictionary?["API_URL"] as? String else {
+      print("❌ Error: The API_URL in the 'Info' Section of the target does not exist.")
+      // 💡 The reason why I am passing the URL here is so we can change the UI more easily in the next iteration
+      return
+    }
     let apiManager = APIManager()
-    apiManager.fetchSimpsonsCharacters { [weak self] result in
+    apiManager.fetchCharacters(from: apiURL) { [weak self] result in
       DispatchQueue.main.async {
         self?.activityIndicator.stopAnimating()
         switch result {
         case .success(let characters):
           self?.allCharacters = characters
           self?.characters = characters
-          self?.title = "Simpsons Characters - \(characters.count)"
+          
+          guard let appTitle = Bundle.main.infoDictionary?["APP_TITLE"] as? String else { return }
+          self?.title = "\(appTitle) - \(characters.count) results"
         case .failure(let error):
           print("Error fetching characters: \(error)")
           // TODO: display an error message to the user

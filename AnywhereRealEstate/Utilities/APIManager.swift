@@ -112,12 +112,4 @@ class APIManager {
     task.resume()
   }
   
-  func fetchSimpsonsCharacters(completion: @escaping (Result<[Character], Error>) -> Void) {
-    fetchCharacters(from: APIManager.simpsonsEndpoint, completion: completion)
-  }
-  
-  func fetchWireCharacters(completion: @escaping (Result<[Character], Error>) -> Void) {
-    fetchCharacters(from: APIManager.wireEndpoint, completion: completion)
-  }
-  
 }
