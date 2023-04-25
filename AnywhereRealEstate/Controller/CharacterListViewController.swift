@@ -85,7 +85,7 @@ class CharacterListViewController: UITableViewController {
     searchBar.sizeToFit()
     
     searchBar.delegate = self
-    searchBar.placeholder = "Search characters..."
+    searchBar.placeholder = "Search characters/description..."
     tableView.tableHeaderView = searchBar
   }
 }
@@ -135,10 +135,14 @@ extension CharacterListViewController: UISearchBarDelegate {
       characters = allCharacters
       tableView.reloadData()
     } else {
-      // Filter the characters by name
-      characters = allCharacters.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+      // Filter the characters by name or description
+      characters = allCharacters.filter { character in
+        character.name.localizedCaseInsensitiveContains(searchText) ||
+        character.description.localizedCaseInsensitiveContains(searchText)
+      }
     }
   }
+  
   
   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
     searchBar.resignFirstResponder()
