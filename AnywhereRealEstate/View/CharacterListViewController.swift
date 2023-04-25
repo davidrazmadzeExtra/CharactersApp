@@ -13,24 +13,31 @@ class CharacterListViewController: UITableViewController {
   
   // MARK: - Properties
   
+  private var allCharacters: [Character] = []
+  
   private var characters: [Character] = [] {
-      didSet {
-          tableView.reloadData()
-      }
+    didSet {
+      tableView.reloadData()
+    }
   }
-
+  
   private let cellReuseIdentifier = "CharacterCell"
   private let showDetailSegue = "ShowCharacterDetail"
   
   // MARK: - UIViews
   
   private let activityIndicator = UIActivityIndicatorView(style: .large)
+  private let searchBar = UISearchBar()
   
   // MARK: - Lifecycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    title = "Simpsons Characters"
+
     setupActivityIndicator()
+    setupSearchBar()
     fetchCharacters()
   }
   
@@ -62,6 +69,7 @@ class CharacterListViewController: UITableViewController {
         self?.activityIndicator.stopAnimating()
         switch result {
         case .success(let characters):
+          self?.allCharacters = characters
           self?.characters = characters
         case .failure(let error):
           print("Error fetching characters: \(error)")
@@ -71,6 +79,16 @@ class CharacterListViewController: UITableViewController {
     }
   }
   
+  private func setupSearchBar() {
+    searchBar.frame = CGRect(x: 0, y: 0, width: 200, height: 70)
+    searchBar.showsCancelButton = true
+    searchBar.searchBarStyle = .default
+    searchBar.sizeToFit()
+    
+    searchBar.delegate = self
+    searchBar.placeholder = "Search characters..."
+    tableView.tableHeaderView = searchBar
+  }
 }
 
 // MARK: - UITableViewDelegate/UITableViewDataSource
@@ -108,3 +126,22 @@ extension CharacterListViewController {
   }
   
 }
+
+// MARK: - UISearchBarDelegate
+
+extension CharacterListViewController: UISearchBarDelegate {
+  
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    if searchText.isEmpty {
+      characters = allCharacters
+    } else {
+      // Filter the characters by name
+      characters = allCharacters.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+    }
+  }
+  
+  func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
+  }
+}
+
