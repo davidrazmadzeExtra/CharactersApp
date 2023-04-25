@@ -17,6 +17,7 @@
 		756F401829F81E7A00BBA3A7 /* API_Response.txt in Resources */ = {isa = PBXBuildFile; fileRef = 756F401729F81E7A00BBA3A7 /* API_Response.txt */; };
 		756F401A29F81ECE00BBA3A7 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756F401929F81ECE00BBA3A7 /* Character.swift */; };
 		756F401C29F81F2D00BBA3A7 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756F401B29F81F2D00BBA3A7 /* APIManager.swift */; };
+		756F401E29F8459200BBA3A7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756F401D29F8459200BBA3A7 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		756F401729F81E7A00BBA3A7 /* API_Response.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = API_Response.txt; sourceTree = "<group>"; };
 		756F401929F81ECE00BBA3A7 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		756F401B29F81F2D00BBA3A7 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		756F401D29F8459200BBA3A7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				756F401B29F81F2D00BBA3A7 /* APIManager.swift */,
+				756F401D29F8459200BBA3A7 /* Extensions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				756F401A29F81ECE00BBA3A7 /* Character.swift in Sources */,
 				756F3FFD29F8126000BBA3A7 /* AppDelegate.swift in Sources */,
 				756F3FFF29F8126000BBA3A7 /* SceneDelegate.swift in Sources */,
+				756F401E29F8459200BBA3A7 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
