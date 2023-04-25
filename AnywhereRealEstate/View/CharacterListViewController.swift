@@ -13,14 +13,62 @@ class CharacterListViewController: UITableViewController {
   
   // MARK: - Properties
   
-  private let characters = ["Bart", "Homer", "Lisa", "Phil", "Jack"]
+  private var characters: [Character] = [] {
+      didSet {
+          tableView.reloadData()
+      }
+  }
+
   private let cellReuseIdentifier = "CharacterCell"
   private let showDetailSegue = "ShowCharacterDetail"
+  
+  // MARK: - UIViews
+  
+  private let activityIndicator = UIActivityIndicatorView(style: .large)
   
   // MARK: - Lifecycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    setupActivityIndicator()
+    fetchCharacters()
+  }
+  
+  // MARK: - Helper Functions
+  
+  private func setupActivityIndicator() {
+    activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+    activityIndicator.color = .gray
+    activityIndicator.hidesWhenStopped = true
+    
+    // Add the activity indicator to the view
+    view.addSubview(activityIndicator)
+    
+    // Set up the constraints
+    NSLayoutConstraint.activate([
+      activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+    ])
+  }
+  
+  /// Fetches the characters using the `APIManager` class
+  private func fetchCharacters() {
+    activityIndicator.startAnimating()
+    
+    // Fetch the character data
+    let apiManager = APIManager()
+    apiManager.fetchSimpsonsCharacters { [weak self] result in
+      DispatchQueue.main.async {
+        self?.activityIndicator.stopAnimating()
+        switch result {
+        case .success(let characters):
+          self?.characters = characters
+        case .failure(let error):
+          print("Error fetching characters: \(error)")
+          // Optionally, display an error message to the user
+        }
+      }
+    }
   }
   
 }
@@ -39,7 +87,8 @@ extension CharacterListViewController {
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
-    cell.textLabel?.text = characters[indexPath.row]
+    let character = characters[indexPath.row]
+    cell.textLabel?.text = character.name
     return cell
   }
   
