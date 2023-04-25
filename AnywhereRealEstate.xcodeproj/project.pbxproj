@@ -18,6 +18,7 @@
 		756F401A29F81ECE00BBA3A7 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756F401929F81ECE00BBA3A7 /* Character.swift */; };
 		756F401C29F81F2D00BBA3A7 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756F401B29F81F2D00BBA3A7 /* APIManager.swift */; };
 		756F401E29F8459200BBA3A7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756F401D29F8459200BBA3A7 /* Extensions.swift */; };
+		756F402129F84DF200BBA3A7 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 756F402029F84DF200BBA3A7 /* SDWebImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				756F402129F84DF200BBA3A7 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +132,9 @@
 			dependencies = (
 			);
 			name = AnywhereRealEstate;
+			packageProductDependencies = (
+				756F402029F84DF200BBA3A7 /* SDWebImage */,
+			);
 			productName = AnywhereRealEstate;
 			productReference = 756F3FF929F8126000BBA3A7 /* AnywhereRealEstate.app */;
 			productType = "com.apple.product-type.application";
@@ -158,6 +163,9 @@
 				Base,
 			);
 			mainGroup = 756F3FF029F8126000BBA3A7;
+			packageReferences = (
+				756F401F29F84DF200BBA3A7 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = 756F3FFA29F8126000BBA3A7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -410,6 +418,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		756F401F29F84DF200BBA3A7 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		756F402029F84DF200BBA3A7 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 756F401F29F84DF200BBA3A7 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 756F3FF129F8126000BBA3A7 /* Project object */;
 }

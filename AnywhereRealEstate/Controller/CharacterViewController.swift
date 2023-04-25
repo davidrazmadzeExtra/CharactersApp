@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CharacterViewController: UIViewController {
   
@@ -34,14 +35,24 @@ class CharacterViewController: UIViewController {
     titleLabel.text = character.name
     descriptionTextView.text = character.description
     
-    // Load the image, display missing image icon if it doesn't exist
+    // Show an activity indicator while downloading the image
+    let activityIndicator = UIActivityIndicatorView(style: .medium)
+    activityIndicator.center = characterImageView.center
+    activityIndicator.startAnimating()
+    characterImageView.addSubview(activityIndicator)
+    
+    // Load the character image, display missing image icon if it doesn't exist
+    let missingImage = UIImage(named: "image_missing")
     guard let iconURL = character.iconURL else {
-      characterImageView.image = UIImage(named: "image_missing")
+      characterImageView.image = missingImage
+      activityIndicator.stopAnimating()
       return
     }
-    let imageURL = URL(string: iconURL)
-    let imageData = try? Data(contentsOf: imageURL!)
-    characterImageView.image = UIImage(data: imageData!)
+    
+    // ✅ Image loaded successfully
+    characterImageView.sd_setImage(with: URL(string: iconURL), placeholderImage: missingImage) { (_, _, _, _) in
+      activityIndicator.stopAnimating()
+    }
   }
   
 }
