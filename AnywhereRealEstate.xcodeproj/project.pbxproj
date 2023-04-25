@@ -90,8 +90,6 @@
 		756F401129F8130500BBA3A7 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				756F400029F8126000BBA3A7 /* CharacterListViewController.swift */,
-				756F401529F817C900BBA3A7 /* CharacterViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -99,6 +97,8 @@
 		756F401229F8131800BBA3A7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				756F400029F8126000BBA3A7 /* CharacterListViewController.swift */,
+				756F401529F817C900BBA3A7 /* CharacterViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
