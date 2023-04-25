@@ -414,6 +414,7 @@
 				DEVELOPMENT_TEAM = 4C5RY8DB74;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AnywhereRealEstate/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Simpsons Character Viewer";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = SimpsonsLaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -442,6 +443,7 @@
 				DEVELOPMENT_TEAM = 4C5RY8DB74;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AnywhereRealEstate/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Simpsons Character Viewer";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = SimpsonsLaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -470,6 +472,7 @@
 				DEVELOPMENT_TEAM = 4C5RY8DB74;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AnywhereRealEstate copy-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "The Wire Character Viewer";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = TheWireLaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -498,6 +501,7 @@
 				DEVELOPMENT_TEAM = 4C5RY8DB74;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "AnywhereRealEstate copy-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "The Wire Character Viewer";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = TheWireLaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
