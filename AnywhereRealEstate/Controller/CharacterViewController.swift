@@ -31,14 +31,17 @@ class CharacterViewController: UIViewController {
   
   func setupCharacterDetails() {
     guard let character else { return }
-    
-    let imageURL = URL(string: "https://pngimg.com/uploads/simpsons/simpsons_PNG6.png")
-    let imageData = try? Data(contentsOf: imageURL!)
-    characterImageView.image = UIImage(data: imageData!)
-    
     titleLabel.text = character.name
     descriptionTextView.text = character.description
-    print(character.description)
+    
+    // Load the image, display missing image icon if it doesn't exist
+    guard let iconURL = character.iconURL else {
+      characterImageView.image = UIImage(named: "image_missing")
+      return
+    }
+    let imageURL = URL(string: iconURL)
+    let imageData = try? Data(contentsOf: imageURL!)
+    characterImageView.image = UIImage(data: imageData!)
   }
   
 }

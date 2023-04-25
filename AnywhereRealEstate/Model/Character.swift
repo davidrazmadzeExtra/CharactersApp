@@ -13,7 +13,7 @@ struct Character {
   
   let name: String
   let title: String
-  let iconURL: String
+  var iconURL: String? = nil
   let description: String
   
   // MARK: - Enum Keys
@@ -30,8 +30,13 @@ struct Character {
   
   init(name: String, iconUrl: String, title: String, description: String) {
     self.name = name
-    self.iconURL = iconUrl
     self.title = title
     self.description = description
+    
+    /// Apu Nahasapeemapetilon example: https://duckduckgo.com/i/99b04638.png
+    /// iconURL = `/i/bc74928e.jpg`
+    if !iconUrl.isEmpty {
+      self.iconURL = "https://duckduckgo.com\(iconUrl)"
+    }
   }
 }

@@ -14,6 +14,8 @@ class APIManager {
   private static let simpsonsEndpoint = "http://api.duckduckgo.com/?q=simpsons+characters&format=json"
   private static let wireEndpoint = "http://api.duckduckgo.com/?q=the+wire+characters&format=json"
   
+  // MARK: - Decodable structs
+  
   private struct ApiResponse: Decodable {
     let relatedTopics: [RelatedTopic]
     
