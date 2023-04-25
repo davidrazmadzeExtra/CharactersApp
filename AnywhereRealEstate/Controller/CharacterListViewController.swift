@@ -62,7 +62,7 @@ class CharacterListViewController: UITableViewController {
     
     // Fetch the character data
     let apiManager = APIManager()
-    apiManager.fetchWireCharacters { [weak self] result in
+    apiManager.fetchSimpsonsCharacters { [weak self] result in
       DispatchQueue.main.async {
         self?.activityIndicator.stopAnimating()
         switch result {
