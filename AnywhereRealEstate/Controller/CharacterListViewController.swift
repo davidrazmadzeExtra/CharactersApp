@@ -22,6 +22,13 @@ class CharacterListViewController: UITableViewController {
   
   private var characters: [Character] = [] {
     didSet {
+      // Select the first character for iPad
+      if UIDevice.current.userInterfaceIdiom == .pad {
+        let indexPath = IndexPath(row: 0, section: 0)
+        tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        tableView(tableView, didSelectRowAt: indexPath)
+      }
+      
       tableView.reloadData()
     }
   }
@@ -46,7 +53,6 @@ class CharacterListViewController: UITableViewController {
     fetchCharacters()
     
     tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-    
   }
   
   // MARK: - Helper Functions
