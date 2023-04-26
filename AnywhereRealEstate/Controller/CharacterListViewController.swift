@@ -7,6 +7,11 @@
 
 import UIKit
 
+/// Protocol used to communicate with the left side of the iPad with the right side for which character was selected
+protocol CharacterListViewControllerDelegate: AnyObject {
+  func didSelectCharacter(_ character: Character)
+}
+
 /// Contains a `UITableView` containing different characters coming from a RESTful API
 /// This is the initial view controller that gets loaded when the app is launched.
 class CharacterListViewController: UITableViewController {
@@ -24,6 +29,8 @@ class CharacterListViewController: UITableViewController {
   private let cellReuseIdentifier = "CharacterCell"
   private let showDetailSegue = "ShowCharacterDetail"
   
+  weak var delegate: CharacterListViewControllerDelegate?
+  
   // MARK: - UIViews
   
   private let activityIndicator = UIActivityIndicatorView(style: .large)
@@ -39,6 +46,7 @@ class CharacterListViewController: UITableViewController {
     fetchCharacters()
     
     tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+    
   }
   
   // MARK: - Helper Functions
@@ -121,7 +129,12 @@ extension CharacterListViewController {
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    performSegue(withIdentifier: showDetailSegue, sender: self)
+    let character = characters[indexPath.row]
+    delegate?.didSelectCharacter(character)
+    
+    if UIDevice.current.userInterfaceIdiom == .phone {
+      performSegue(withIdentifier: showDetailSegue, sender: self)
+    }
     tableView.deselectRow(at: indexPath, animated: true)
   }
   
