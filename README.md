@@ -28,7 +28,7 @@ I used the Swift Package Manager to add the follow libraries
 <img width="300" alt="Screenshot 2023-04-25 at 10 05 48 PM" src="https://user-images.githubusercontent.com/75696759/234447534-ec2f4f17-1d26-4690-8af2-960b887e35ff.png">
 
 4. Build and run the project on an iPhone or iPad simulator or a physical device
-5. View commit history to see my thought process
+5. View commit history to see my thought process - https://github.com/davidrazmadzeExtra/CharactersApp/commits/main
 
 ## Screenshots
 
