@@ -110,7 +110,9 @@ class CharacterListViewController: UITableViewController {
     searchBar.sizeToFit()
     
     searchBar.delegate = self
-    searchBar.placeholder = "Search characters/description..."
+    
+    searchBar.placeholder = UIDevice.current.userInterfaceIdiom == .pad ? "Search characters..." : "Search characters/description..."
+    
     tableView.tableHeaderView = searchBar
   }
 }
