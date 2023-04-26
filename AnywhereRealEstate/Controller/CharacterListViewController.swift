@@ -7,19 +7,22 @@
 
 import UIKit
 
-/// Protocol used to communicate with the left side of the iPad with the right side for which character was selected
+/// Protocol used to pass information between the list controller and the detail controller
 protocol CharacterListViewControllerDelegate: AnyObject {
+  
+  /// Communicate with the left side of the iPad with the right side for which character was selected
   func didSelectCharacter(_ character: Character)
 }
 
 /// Contains a `UITableView` containing different characters coming from a RESTful API
-/// This is the initial view controller that gets loaded when the app is launched.
 class CharacterListViewController: UITableViewController {
   
   // MARK: - Properties
   
+  /// List of all characters
   private var allCharacters: [Character] = []
   
+  /// Characters used for filtering with the searchbar
   private var characters: [Character] = [] {
     didSet {
       tableView.reloadData()
@@ -48,17 +51,22 @@ class CharacterListViewController: UITableViewController {
     tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
   }
   
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == showDetailSegue,
+       let characterViewController = segue.destination as? CharacterViewController,
+       let selectedIndex = tableView.indexPathForSelectedRow {
+      characterViewController.character = characters[selectedIndex.row]
+    }
+  }
+  
   // MARK: - Helper Functions
   
+  /// Display the loading indicator while fetching the API Data
   private func setupActivityIndicator() {
     activityIndicator.translatesAutoresizingMaskIntoConstraints = false
     activityIndicator.color = .gray
     activityIndicator.hidesWhenStopped = true
-    
-    // Add the activity indicator to the view
     view.addSubview(activityIndicator)
-    
-    // Set up the constraints
     NSLayoutConstraint.activate([
       activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
@@ -76,9 +84,11 @@ class CharacterListViewController: UITableViewController {
       return
     }
     let apiManager = APIManager()
+    
     apiManager.fetchCharacters(from: apiURL) { [weak self] result in
       DispatchQueue.main.async {
         self?.activityIndicator.stopAnimating()
+        
         switch result {
         case .success(let characters):
           self?.allCharacters = characters
@@ -95,12 +105,13 @@ class CharacterListViewController: UITableViewController {
           }
         case .failure(let error):
           print("Error fetching characters: \(error)")
-          // TODO: display an error message to the user
+          // TODO: display an error message to the user. Can be a UIAlertController or custom popup
         }
       }
     }
   }
   
+  /// Add a searchbar to the tableView's header view
   private func setupSearchBar() {
     searchBar.frame = CGRect(x: 0, y: 0, width: 200, height: 70)
     searchBar.showsCancelButton = true
@@ -108,13 +119,12 @@ class CharacterListViewController: UITableViewController {
     searchBar.backgroundImage = UIImage()
     searchBar.backgroundColor = .clear
     searchBar.sizeToFit()
-    
     searchBar.delegate = self
-    
     searchBar.placeholder = UIDevice.current.userInterfaceIdiom == .pad ? "Search characters..." : "Search characters/description..."
     
     tableView.tableHeaderView = searchBar
   }
+  
 }
 
 // MARK: - UITableViewDelegate/UITableViewDataSource
@@ -136,6 +146,7 @@ extension CharacterListViewController {
     return cell
   }
   
+  /// Display the `CharacterViewController` based on which character was selected
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let character = characters[indexPath.row]
     delegate?.didSelectCharacter(character)
@@ -144,16 +155,6 @@ extension CharacterListViewController {
       performSegue(withIdentifier: showDetailSegue, sender: self)
     }
     tableView.deselectRow(at: indexPath, animated: true)
-  }
-  
-  // MARK: - Prepare for segue
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == showDetailSegue,
-       let characterViewController = segue.destination as? CharacterViewController,
-       let selectedIndex = tableView.indexPathForSelectedRow {
-      characterViewController.character = characters[selectedIndex.row]
-    }
   }
   
 }
@@ -183,4 +184,3 @@ extension CharacterListViewController: UISearchBarDelegate {
   }
   
 }
-

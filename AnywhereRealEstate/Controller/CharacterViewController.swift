@@ -8,11 +8,12 @@
 import UIKit
 import SDWebImage
 
+/// Contains an image, title, and description of a `Character`
 class CharacterViewController: UIViewController {
   
   // MARK: - Properties
   
-  /// Character passed along from the Table View
+  /// Character passed along from the list
   var character: Character?
   
   // MARK: - IBOutlets
@@ -25,6 +26,7 @@ class CharacterViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     setupCharacterDetails()
   }
   
@@ -44,6 +46,7 @@ class CharacterViewController: UIViewController {
     // Load the character image, display missing image icon if it doesn't exist
     let missingImage = UIImage(named: "image_missing")
     guard let iconURL = character.iconURL else {
+      // ❌ Missing image
       characterImageView.image = missingImage
       activityIndicator.stopAnimating()
       return

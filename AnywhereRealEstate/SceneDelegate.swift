@@ -11,7 +11,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
   var window: UIWindow?
   
-  
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     guard let _ = (scene as? UIWindowScene) else { return }
     
@@ -34,7 +33,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = UINavigationController(rootViewController: newCharacterListViewController)
       }
     }
-    
     
   }
   
@@ -73,6 +71,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 extension SceneDelegate: CharacterListViewControllerDelegate {
   
+  /// This function will communicate to the other side of the iPad for which character is selected.
+  /// Initially on iPad it will be the first character after the charactes have been fetched from the API.
   func didSelectCharacter(_ character: Character) {
     if UIDevice.current.userInterfaceIdiom == .pad {
       guard let splitViewController = window?.rootViewController as? UISplitViewController,
