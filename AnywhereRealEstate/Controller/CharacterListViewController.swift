@@ -22,13 +22,6 @@ class CharacterListViewController: UITableViewController {
   
   private var characters: [Character] = [] {
     didSet {
-      // Select the first character for iPad
-      if UIDevice.current.userInterfaceIdiom == .pad {
-        let indexPath = IndexPath(row: 0, section: 0)
-        tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
-        tableView(tableView, didSelectRowAt: indexPath)
-      }
-      
       tableView.reloadData()
     }
   }
@@ -93,6 +86,13 @@ class CharacterListViewController: UITableViewController {
           
           guard let appTitle = Bundle.main.infoDictionary?["APP_TITLE"] as? String else { return }
           self?.title = "\(appTitle) - \(characters.count) results"
+          
+          // Select the first character for iPad
+          if UIDevice.current.userInterfaceIdiom == .pad {
+            let indexPath = IndexPath(row: 0, section: 0)
+            self?.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            self?.tableView((self?.tableView)!, didSelectRowAt: indexPath)
+          }
         case .failure(let error):
           print("Error fetching characters: \(error)")
           // TODO: display an error message to the user
@@ -174,7 +174,6 @@ extension CharacterListViewController: UISearchBarDelegate {
       }
     }
   }
-  
   
   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
     searchBar.resignFirstResponder()
